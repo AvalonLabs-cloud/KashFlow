@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Otp extends Model
+{
+    
+    protected $fillable = [
+        'user_id',
+        'otp',
+        'medium',
+        'reference',
+        'expiration',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    protected $casts = [
+        'expiration' => 'datetime',
+    ];
+}
