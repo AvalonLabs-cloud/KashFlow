@@ -167,10 +167,6 @@ const navItems = [
     { label: 'Profile', icon: 'person' },
 ];
 
-const transactions = [
-    { id: 1, title: 'John Doe', category: 'Transfer', source: 'Kuda Bank', amount: '500.00', type: 'credit', status: 'Successful', icon: 'account_balance_wallet', iconTheme: 'primary-container' },
-    { id: 2, title: 'MTN Airtime', category: 'Airtime', source: 'Self', amount: '2,000.00', type: 'debit', status: 'Successful', icon: 'phone_android', iconTheme: 'secondary' },
-];
 
 const historyData = computed(() => props.history);
 console.log(historyData.value);

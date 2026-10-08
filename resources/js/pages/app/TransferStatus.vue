@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { usePage, router } from '@inertiajs/vue3';
+import {router } from '@inertiajs/vue3';
 import { computed, onMounted } from 'vue';
 import TransferFailure from '@/components/TransferFailure.vue';
 import TransferProcessing from "@/components/TransferProcessing.vue";
@@ -45,8 +45,8 @@ const goHome = () => router.visit('/dashboard');
         <TransferProcessing v-if="status === 'pending'" :data=transaction />
 
         <TransferSuccess v-if="status == 'successful'" @done="goHome" :data=transaction />
-        <!--
-        <TransferFailure v-if="status === 'failed'" :data=transaction  @go-home="goHome" /> -->
+
+         <TransferFailure v-if="status === 'failed'" :data=transaction />
     </div>
     <BottomNav/>
 </template>

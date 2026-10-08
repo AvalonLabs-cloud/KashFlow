@@ -99,7 +99,6 @@ watch(page.props.flash.error , ()=> {
 const {
         fee,
         feeIsLoading,
-        feeError,
         fetchFee,
  } = useTransactionFee()
 

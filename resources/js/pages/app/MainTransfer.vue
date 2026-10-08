@@ -52,9 +52,9 @@ const searchBeneficiaries = () => {
 const isSearching = ref(false);
 const isProcessing = ref(false);
 
-const isFormValid = computed(() => {
-    return formData.accountNumber.length === 10 && selectedBank.value !== '';
-});
+// const isFormValid = computed(() => {
+//     return formData.accountNumber.length === 10 && selectedBank.value !== '';
+// });
 
 
 const initiateTransfer = () => {

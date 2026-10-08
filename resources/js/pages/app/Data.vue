@@ -99,7 +99,6 @@ const page = usePage()
 const {
     fee,
     feeIsLoading,
-    feeError,
     fetchFee,
 } = useTransactionFee()
 
@@ -195,9 +194,9 @@ const filteredPlans = computed(() => {
     return Object.fromEntries(Object.entries(bundleListIntermediate.value).filter(([key, plan]) => plan?.validity_period == activeCategory.value));
 });
 
-const isFormValid = computed(() => {
-    return phoneNumber.value.replace(/\s/g, '').length >= 10 && selectedPlanItemCode.value !== null;
-});
+// const isFormValid = computed(() => {
+//     return phoneNumber.value.replace(/\s/g, '').length >= 10 && selectedPlanItemCode.value !== null;
+// });
 
 
 watch(selectedProvider, (newProvider) => {

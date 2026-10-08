@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { ref, onMounted, nextTick } from 'vue'
 import { useForm } from "@inertiajs/vue3";
+import { ref, nextTick } from 'vue'
+
 
 import Header from '../../components/Header.vue';
 
@@ -20,7 +21,7 @@ const handleFormSubmit = () => {
   savedComplaintDraft.value = complaintText.value
   currentState.value = 'loading'
   form.post('/submitComplaint')
-  
+
   // Simulate network request
   setTimeout(() => {
     currentState.value = 'success'
@@ -50,7 +51,7 @@ const resetAll = async () => {
     <!-- Main Content Container -->
     <main class="main-content">
       <Transition name="view-state" mode="out-in">
-        
+
         <!-- ========================================================================= -->
         <!-- STATE 1: COMPLAINT FORM & LOADING -->
         <!-- ========================================================================= -->
@@ -65,7 +66,7 @@ const resetAll = async () => {
 
           <!-- Email Composition Container -->
           <form @submit.prevent="handleFormSubmit" class="complaint-form">
-            
+
             <!-- Subtle Non-editable "To:" Header Field -->
             <div class="to-field">
               <span class="to-label">To:</span>

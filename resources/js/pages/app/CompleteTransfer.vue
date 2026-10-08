@@ -37,13 +37,12 @@ const amount = ref('0')
 const { 
         fee,
         feeIsLoading,
-        feeError,
         fetchFee,
  } = useTransactionFee()
 
 
 const handleConfirm = () => {
-    
+
     fetchFee(amount.value)
     confirm.value = !confirm.value;
 };

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import {router }from "@inertiajs/vue3"
-import axios from "axios";
 import { Menu } from "lucide-vue-next"
-import { onMounted, ref , onUnmounted } from "vue";
+import{ref , onUnmounted } from "vue";
 
 import Sidebar from '@/components/Sidebar.vue';
 import WalletCard from "@/components/WalletCard.vue";
@@ -443,26 +442,26 @@ onUnmounted(() => {
                                         <p class="font-bold text-text mb-3">Filter By Status</p>
                                         <div class="space-y-2"><label
                                                 class="flex items-center gap-2 cursor-pointer"><input type="checkbox"
-                                                    class="filter-checkbox" data-filter="completed" checked="checked">
+                                                    class="filter-checkbox" data-filter="completed">
                                                 <span class="text-sm">Completed</span></label> <label
                                                 class="flex items-center gap-2 cursor-pointer"><input type="checkbox"
-                                                    class="filter-checkbox" data-filter="pending" checked="checked">
+                                                    class="filter-checkbox" data-filter="pending">
                                                 <span class="text-sm">Pending</span></label> <label
                                                 class="flex items-center gap-2 cursor-pointer"><input type="checkbox"
-                                                    class="filter-checkbox" data-filter="failed" checked="checked">
+                                                    class="filter-checkbox" data-filter="failed">
                                                 <span class="text-sm">Failed</span></label></div>
                                     </div>
                                     <div class="p-3 border-b border-border">
                                         <p class="font-bold text-text mb-3">Filter By Type</p>
                                         <div class="space-y-2"><label
                                                 class="flex items-center gap-2 cursor-pointer"><input type="checkbox"
-                                                    class="filter-checkbox" data-filter="send" checked="checked"> <span
+                                                    class="filter-checkbox" data-filter="send" > <span
                                                     class="text-sm">Send</span></label> <label
                                                 class="flex items-center gap-2 cursor-pointer"><input type="checkbox"
-                                                    class="filter-checkbox" data-filter="receive" checked="checked">
+                                                    class="filter-checkbox" data-filter="receive">
                                                 <span class="text-sm">Receive</span></label> <label
                                                 class="flex items-center gap-2 cursor-pointer"><input type="checkbox"
-                                                    class="filter-checkbox" data-filter="exchange" checked="checked">
+                                                    class="filter-checkbox" data-filter="exchange">
                                                 <span class="text-sm">Exchange</span></label></div>
                                     </div>
                                     <div class="p-3">
@@ -734,7 +733,7 @@ onUnmounted(() => {
                                 <div class="relative h-14 w-full bg-bg rounded-2xl">
                                     <div class="absolute h-full w-full top-0 left-0"><input
                                             class="search-input-index py-2.5! lg:py-3.5!" id="selectedModalMenu"
-                                            placeholder="select a currency" readonly="readonly"
+                                            placeholder="select a currency" 
                                             onclick="modalListPreview('sendMoneyModal')"></div>
                                     <div class="absolute top-[110%] w-full bg-bg border border-border rounded-2xl flex flex-col gap-y-5 lg:px-5 px-2.5 py-5 max-h-[300px] overflow-y-auto transition-all duration-150 ease-linear opacity-0 z-70 pointer-events-none"
                                         id="listModalMenu"></div>

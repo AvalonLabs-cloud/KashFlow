@@ -74,8 +74,8 @@
 
       <!-- Optional Contextual Illustration -->
       <div class="background-illustration">
-        <img 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAMO5nUX1QwIIa5wuDWNrON8H1e9eT9ZbLvUbpA-cSWG49mvdsXkoIoFfCJljgJgXiuqpQFEdmMVOliDP_YkIufwLkY0j9bqhjGZ-ap63PfjzAv9KI9mGrvrDBFhuWujFyWDIIDf2wXNc7-GfqnrltDHCDVunq8bDoY5pTuvnEYEh1Kz99PCKcN-oUvshYwBrW5BIqgRz3LeKvbAh2EXLTumWq0Hxs-VWazx0QojXDxoBs1homaHHMSu_jn2w0L9qkbhvvp3zzVXOh" 
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAMO5nUX1QwIIa5wuDWNrON8H1e9eT9ZbLvUbpA-cSWG49mvdsXkoIoFfCJljgJgXiuqpQFEdmMVOliDP_YkIufwLkY0j9bqhjGZ-ap63PfjzAv9KI9mGrvrDBFhuWujFyWDIIDf2wXNc7-GfqnrltDHCDVunq8bDoY5pTuvnEYEh1Kz99PCKcN-oUvshYwBrW5BIqgRz3LeKvbAh2EXLTumWq0Hxs-VWazx0QojXDxoBs1homaHHMSu_jn2w0L9qkbhvvp3zzVXOh"
           alt="Security Illustration"
         />
       </div>
@@ -83,7 +83,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang='ts' setup>
 import { ref, onMounted } from 'vue';
 
 const otp = ref(['7', '3', '', '', '']);
@@ -92,6 +92,7 @@ const otpInputs = ref([]);
 
 const handleInput = (event, index) => {
   const val = event.target.value;
+
   if (val && index < 4) {
     otpInputs.value[index + 1].focus();
   }
