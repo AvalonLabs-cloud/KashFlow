@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
         Transfer::observe(TransferObserver::class);
-        LedgerEntry::observe(LedgerEntryObserver::class);
+        // LedgerEntry::observe(LedgerEntryObserver::class);
     }
 
     /**
