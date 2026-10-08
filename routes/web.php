@@ -142,7 +142,7 @@ Route::middleware([
 });
 
 
-Route::post('/webhook', FlutterWaveWebhookController::class)->name('flutterwave.webhook');
+// Route::post('/webhook', FlutterWaveWebhookController::class)->name('flutterwave.webhook');
 
 
 Route::middleware(['auth', 'verified', EnsureUserHasCompletedOnboarding::class])->prefix('flutterwave')->group(function () {
