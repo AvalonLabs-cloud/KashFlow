@@ -62,14 +62,14 @@ Route::prefix('onboarding')->group(function () {
     });
 
     Route::middleware([EnsureOnPhaseTwoOnboarding::class])->group(function () {
-        Route::get('/phase_two', [OnboardingController::class, 'showPhasetwo'])->name('verification.notice');
+        Route::get('/phase_two', [OnboardingController::class, 'showPhasetwo']);
 
 
         Route::post('/email/verification-notification', function (Request $request) {
             Log::info('Received request to resend email verification notification');
             $request->user('web')->sendEmailVerificationNotification();
             return back()->with('message', 'Verification link sent!');
-        })->middleware(['throttle:10,1'])->name('verification.send');
+        })->middleware(['throttle:10,1']);
     });
 
     Route::middleware(['auth', 'verified', EnsurePhaseThreeOnboarding::class])->group(function () {

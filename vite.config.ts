@@ -6,6 +6,12 @@ import { defineConfig } from 'vite';
 import path from 'path';
 
 export default defineConfig({
+    build: {
+        rollupOptions: {
+               external: [/\/routes\//],
+
+        },
+    },
     plugins: [
         laravel({
             input: ['resources/js/app.ts'],
@@ -21,9 +27,9 @@ export default defineConfig({
                 },
             },
         }),
-        wayfinder({
-            formVariants: true,
-        }),
+        // wayfinder({
+        //     formVariants: true,
+        // }),
     ],
 
     server: {
