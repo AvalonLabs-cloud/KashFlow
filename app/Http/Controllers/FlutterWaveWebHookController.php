@@ -9,11 +9,10 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class FlutterwaveWebhookController
+class FlutterWaveWebhookController
 {
     public function __invoke(Request $request): Response
     {
-
 
         if (!$this->verifySignature($request)) {
             Log::warning('Invalid Flutterwave webhook signature.', [

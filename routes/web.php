@@ -23,7 +23,7 @@ use App\Http\Middleware\EnsureUserAccountIsEligible;
 use App\Http\Middleware\EnsureUserAccountBalanceIsSufficient;
 use App\Http\Middleware\EnsureUserAccountPinIsCorrectAndTransactionDataNotTamperedWith;
 use App\Http\Middleware\EnsureRequestEndpointIsValid;
-use App\Http\Controllers\FlutterwaveWebhookController;
+use App\Http\Controllers\FlutterWaveWebhookController;
 use App\Http\Controllers\PinController;
 use App\Http\Middleware\EnsurePhaseOneOnboarding;
 use Inertia\Inertia;
@@ -142,7 +142,7 @@ Route::middleware([
 });
 
 
-Route::post('/webhook', FlutterwaveWebhookController::class)->name('flutterwave.webhook');
+Route::post('/webhook', FlutterWaveWebhookController::class)->name('flutterwave.webhook');
 
 
 Route::middleware(['auth', 'verified', EnsureUserHasCompletedOnboarding::class])->prefix('flutterwave')->group(function () {
