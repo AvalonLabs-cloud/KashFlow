@@ -15,21 +15,21 @@ use Illuminate\Support\Str;
 
 class FlutterwaveService
 {
-    protected string $baseUrl;
+    protected  $baseUrl;
 
-    protected string $secretKey;
+    protected $secretKey;
 
-    protected string $accessToken;
+    protected $accessToken;
 
-    protected string $tokenGenerationUrl;
+    protected $tokenGenerationUrl;
 
-    protected string $clientId;
+    protected $clientId;
 
-    protected string $customer_id;
+    protected $customer_id;
 
-    protected string $userReference;
+    protected $userReference;
 
-    protected int $transactionretry = 3;
+    protected $transactionretry = 3;
 
     protected $lastTokenGenerationTime;
 
@@ -53,7 +53,7 @@ class FlutterwaveService
 
     public function __construct()
     {
-        $this->baseUrl = config('flutterwave.base_url');
+        $this->baseUrl = config('flutterwave.base_url' , 'https://api.flutterwave.com/v3');
         $this->secretKey = config('flutterwave.secret_key');
         $this->tokenGenerationUrl = config('flutterwave.token_generation_url');
         $this->clientId = config('flutterwave.client_id');
