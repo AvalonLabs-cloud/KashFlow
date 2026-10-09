@@ -61,6 +61,8 @@ createInertiaApp({
             `./pages/${name}.vue`,
             import.meta.glob<DefineComponent>('./pages/**/*.vue'),
         ),
+        console.log(name);
+        
     setup({ el, App, props, plugin }) {
         const pinia = createPinia()
         pinia.use(piniaPluginPersistedstate)
