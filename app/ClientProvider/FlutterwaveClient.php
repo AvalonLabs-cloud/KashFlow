@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class FlutterwaveClient
 {
-    protected string $baseUrl;
+    protected  $baseUrl;
 
     protected array $headers = [];
 
