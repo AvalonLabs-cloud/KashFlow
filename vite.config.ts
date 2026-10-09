@@ -14,7 +14,9 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: ['resources/js/app.ts'],
+            input: ['resources/js/app.ts',
+                    'resources/js/pages/app/Login.vue' 
+            ],
             ssr: 'resources/js/ssr.ts',
             refresh: true,
         }),
