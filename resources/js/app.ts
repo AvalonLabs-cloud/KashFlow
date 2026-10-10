@@ -27,12 +27,12 @@ import "vue3-snackbar/styles";
 //     forceTLS: true,
 // });
 
-const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY,
-    {
-  cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-});
+// const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY,
+//     {
+//   cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+// });
 
-window.Pusher = pusher;
+// window.Pusher = pusher;
 
 // import '../js/helpers/registration.js'
 
