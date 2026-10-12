@@ -13,7 +13,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Notifications\Notification;
 
-class User extends Authenticatable implements MustVerifyEmail, HasName
+class User extends Authenticatable implements  HasName
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, SoftDeletes, TwoFactorAuthenticatable;

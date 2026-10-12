@@ -44,13 +44,13 @@ class OnboardingController extends Controller
         $user->onboarding()->updateOrCreate([
             'user_id' => $user->id,
         ], [
-            'phase' => OnboardingPhase::PHASE_TWO,
+            'phase' => OnboardingPhase::PHASE_THREE,
             'is_authenticated' => true,
         ]);
 
         event(new Registered($user));
 
-        return redirect('onboarding/phase_two')->with('success', 'Phase one completed successfully');
+        return redirect('onboarding/phase_three')->with('success', 'Phase one completed successfully');
     }
 
     public function showPhasetwo(Request $request)

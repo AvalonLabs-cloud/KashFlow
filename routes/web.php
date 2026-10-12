@@ -34,26 +34,25 @@ use App\Http\Middleware\EnsurePhaseFourOnboarding;
 use App\Http\Middleware\EnsureOnPhaseTwoOnboarding;
 
 
-
 Route::get('/login', [UserController::class, 'loginPage'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    try {
-        $request->fulfill();
-        $user = $request->user();
-        if ($user) {
-            $user->onboarding()->update([
-                'phase' => OnboardingPhase::PHASE_THREE,
-            ]);
-        }
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     try {
+//         $request->fulfill();
+//         $user = $request->user();
+//         if ($user) {
+//             $user->onboarding()->update([
+//                 'phase' => OnboardingPhase::PHASE_THREE,
+//             ]);
+//         }
 
-        return redirect()->route('phone.verification.ui');
-    } catch (Exception $e) {
-        Log::error('Error during email verification', ['error' => $e->getMessage()]);
-        return redirect('/onboarding/phase_two')->with('error', 'There was an error verifying your email. Please try again.');
-    }
-})->middleware(['auth', 'signed'])->name('verification.verify');
+//         return redirect()->route('phone.verification.ui');
+//     } catch (Exception $e) {
+//         Log::error('Error during email verification', ['error' => $e->getMessage()]);
+//         return redirect('/onboarding/phase_two')->with('error', 'There was an error verifying your email. Please try again.');
+//     }
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::prefix('onboarding')->group(function () {
     Route::middleware([EnsurePhaseOneOnboarding::class])->group(function () {
@@ -61,18 +60,18 @@ Route::prefix('onboarding')->group(function () {
         Route::post('/phase_one', [OnboardingController::class, 'storePhaseone']);
     });
 
-    Route::middleware([EnsureOnPhaseTwoOnboarding::class])->group(function () {
-        Route::get('/phase_two', [OnboardingController::class, 'showPhasetwo']);
+    // Route::middleware([EnsureOnPhaseTwoOnboarding::class])->group(function () {
+    //     Route::get('/phase_two', [OnboardingController::class, 'showPhasetwo']);
 
 
-        Route::post('/email/verification-notification', function (Request $request) {
-            Log::info('Received request to resend email verification notification');
-            $request->user('web')->sendEmailVerificationNotification();
-            return back()->with('message', 'Verification link sent!');
-        })->middleware(['throttle:10,1']);
-    });
+    //     Route::post('/email/verification-notification', function (Request $request) {
+    //         Log::info('Received request to resend email verification notification');
+    //         $request->user('web')->sendEmailVerificationNotification();
+    //         return back()->with('message', 'Verification link sent!');
+    //     })->middleware(['throttle:10,1']);
+    // });
 
-    Route::middleware(['auth', 'verified', EnsurePhaseThreeOnboarding::class])->group(function () {
+    Route::middleware(['auth' , EnsurePhaseThreeOnboarding::class])->group(function () {
         Route::get('/phase_three', [OnboardingController::class, 'showPhaseThree'])->name('phone.verification.ui');
         Route::post('/resend_phone_verification_sms', [OnboardingController::class, 'resendPhoneVerificationOtp']);
         Route::post('/send_phone_verification_sms', [OnboardingController::class, 'sendPhoneNumberOtp']);
@@ -81,7 +80,7 @@ Route::prefix('onboarding')->group(function () {
     });
 
 
-    Route::middleware(['auth', 'verified'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         Route::get('/phase_four', [OnboardingController::class, 'showPhaseFour'])->name('bvn.consent');
         Route::post('/bvn/acquisition', [OnboardingController::class, 'storeBvn'])->name('bvn.consent.initiate');
     });
@@ -94,7 +93,7 @@ Route::prefix('onboarding')->group(function () {
     Route::post('/complete', [OnboardingController::class, 'complete'])->name('complete');
 });
 
-Route::middleware(['auth', 'verified', EnsureUserHasCompletedOnboarding::class])->group(function () {
+Route::middleware(['auth' , EnsureUserHasCompletedOnboarding::class])->group(function () {
     Route::get('/transaction_status', [UserController::class, 'transactionStatus'])->name('complete_transfer_status');
     Route::get('/main-index', [UserController::class, 'indexPage'])->name('index-page');
     Route::get('/airtime', [UserController::class, 'airtimePage']);
@@ -123,12 +122,11 @@ Route::middleware(['auth', 'verified', EnsureUserHasCompletedOnboarding::class])
 });
 
 
-Route::post('/admin/cashout',[AdminCheckoutController::class , 'initiateTransfer'])->middleware(['auth','verified' , EnsureIsAdmin::class]);
+Route::post('/admin/cashout',[AdminCheckoutController::class , 'initiateTransfer'])->middleware(['auth' , EnsureIsAdmin::class]);
 
 
 Route::middleware([
     'auth',
-    'verified',
     EnsureTransactionTypeIsValid::class,
     EnsureRequestDataShapeIsValidForTransactionType::class,
     EnsureRequestDataIsValidForTransactionType::class,
@@ -145,7 +143,7 @@ Route::middleware([
 // Route::post('/webhook', FlutterWaveWebhookController::class)->name('flutterwave.webhook');
 
 
-Route::middleware(['auth', 'verified', EnsureUserHasCompletedOnboarding::class])->prefix('flutterwave')->group(function () {
+Route::middleware(['auth', EnsureUserHasCompletedOnboarding::class])->prefix('flutterwave')->group(function () {
     Route::get('/banks', [FlutterwaveController::class, 'fetchBanks']);
     Route::post('/accounts/resolve', [FlutterwaveController::class, 'resolveAccount']);
     Route::post('/processPayout', [OrchestratorController::class, 'processPayout']);
