@@ -3,19 +3,7 @@
         <main class="ev-main">
             <div class="ev-container">
                 <div class="ev-header">
-                    <span style="
-    display: block;
-    margin-bottom: 20px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    background: #fff7ed;
-    border: 1px solid #fdba74;
-    color: #c2410c;
-    font-size: 14px;
-    font-weight: 500;
-  ">
-                        ⚠️ This service is currently available only in Nigeria.
-                    </span>
+    <DemoInfo/>
                     <div class="ev-icon-container">
                         <span class="material-symbols-outlined ev-icon-security"><svg xmlns="http://www.w3.org/2000/svg"
                                 width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#00ffb3" stroke-width="2"
@@ -99,6 +87,7 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
+import DemoInfo from '@/components/DemoInfo.vue';
 import { usePhoneVerification } from '@/composables/useVerifyAndStorePhoneNumber';
 const { loading, error, verifyPhone } = usePhoneVerification();
 

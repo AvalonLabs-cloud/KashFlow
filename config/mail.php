@@ -36,9 +36,9 @@ return [
     */
 
     'mailers' => [
-        'mailgun' => [
-            'transport' => 'mailgun',
-        ],
+      'mailgun' => [
+    'transport' => 'mailgun',
+],
         'smtp' => [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST'),
