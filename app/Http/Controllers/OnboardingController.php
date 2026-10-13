@@ -62,7 +62,7 @@ class OnboardingController extends Controller
     public function sendPhoneNumberOtp(Request $request, sendPhoneNumberVerificationOtp $phoneNumberVerification)
     {
         $validated = $request->validate([
-            'phone_number' => 'required|string|size:10',
+            'phone_number' => 'required|string|size:11',
         ]);
         $user = Auth::user();
 
