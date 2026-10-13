@@ -74,13 +74,6 @@
                         </span>
                     </button>
                 </form>
-
-                <div class="ev-footer">
-                    <p class="ev-legal-text">
-                        By continuing, you agree to our <a class="ev-link" href="#">Terms of Service</a> and <a
-                            class="ev-link" href="#">Privacy Policy</a>.
-                    </p>
-                </div>
             </div>
         </main>
     </div>

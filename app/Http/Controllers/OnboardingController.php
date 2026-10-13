@@ -19,6 +19,7 @@ use App\BvnConsentStatus;
 use Illuminate\Support\Str;
 use App\Domains\Onboarding\Services\CompleteOnboarding;
 use App\Transactions\CreateOtpRecord;
+use PSpell\Config;
 
 class OnboardingController extends Controller
 {
@@ -223,6 +224,9 @@ class OnboardingController extends Controller
 
         $completeOnboardingService = app(CompleteOnboarding::class);
         $result = $completeOnboardingService->execute($dataToCreateVirtualAccount);
+       if (config('demo')) {
+        // create credit records and benficiaries
+       }
         if ($result) {
             return redirect()->route('pin.set');
         }

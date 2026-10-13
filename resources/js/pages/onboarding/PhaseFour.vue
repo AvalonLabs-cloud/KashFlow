@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import { useForm } from '@inertiajs/vue3';
 import { ref, reactive } from 'vue';
+import DemoInfo from '@/components/DemoInfo.vue';
+import DemoInstructions from '@/components/DemoInstructions.vue';
 
 
 const form = useForm({
     bvn: ''
 });
 
+const instruction = ref('Enter the numbers 22222223883');
 
 const errors = reactive({
     bvn: ''
@@ -64,6 +67,7 @@ const handleFormSubmit = () => {
                         <span class="material-symbols-outlined">shield_lock</span>
                     </div>
                 </div>
+                    <DemoInfo/>
 
                 <form class="form" @submit.prevent="handleFormSubmit">
                     <div class="form-group">
@@ -92,9 +96,7 @@ const handleFormSubmit = () => {
 
                 <div class="disclaimer-section">
                     <span class="material-symbols-outlined info-icon">info</span>
-                    <p class="disclaimer-text">
-                        By continuing, you authorize FintechID to verify your details with regulatory authorities. We never store your BVN or share it with unauthorized third parties.
-                    </p>
+                   <DemoInstructions :instructions="instruction"/>
                 </div>
             </div>
         </main>

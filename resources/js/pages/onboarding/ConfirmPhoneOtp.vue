@@ -95,10 +95,9 @@ const notification = ref<InstanceType<typeof SuccessNotification> | null>(null)
 
 const page = usePage()
 // UI Loading & Transition Flags
-
 const isLoading = ref(true)
 const isMounted = ref(false)
-const instruction = ref('enter 777777')
+const instruction = ref('Enter 777777')
 // OTP State
 const otp = ref(['', '', '', '', '', ''])
 const otpInputs = ref([])
