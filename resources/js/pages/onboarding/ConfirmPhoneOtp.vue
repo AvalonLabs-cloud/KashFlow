@@ -117,7 +117,7 @@ let timerInterval = null
 const isOtpComplete = computed(() => otp.value.every(char => char.length === 1))
 
 const displayForSuccess = () => {
-    notification.value.showSuccess(page.props.flash.success)
+    notification.value?.showSuccess(page.props.flash.success)
 }
 
 const buttonText = computed(() => {
