@@ -128,8 +128,8 @@ Route::post('/admin/cashout',[AdminCheckoutController::class , 'initiateTransfer
 Route::middleware([
     'auth',
     EnsureTransactionTypeIsValid::class,
-    EnsureRequestDataShapeIsValidForTransactionType::class,
-    EnsureRequestDataIsValidForTransactionType::class,
+    // EnsureRequestDataShapeIsValidForTransactionType::class,
+    // EnsureRequestDataIsValidForTransactionType::class,
     EnsureUserAccountIsEligible::class,
     EnsureUserAccountBalanceIsSufficient::class,
     EnsureUserAccountPinIsCorrectAndTransactionDataNotTamperedWith::class
