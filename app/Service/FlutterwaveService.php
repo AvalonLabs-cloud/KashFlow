@@ -55,8 +55,6 @@ class FlutterwaveService
     {
         $this->baseUrl = config('flutterwave.base_url' , 'https://api.flutterwave.com/v3');
         $this->secretKey = config('flutterwave.secret_key');
-        $this->tokenGenerationUrl = config('flutterwave.token_generation_url');
-        $this->clientId = config('flutterwave.client_id');
         $this->userReference = Str::random(16);
         $this->accessToken = '';
 
@@ -156,9 +154,8 @@ class FlutterwaveService
 
     public function getBanks(string $country = 'NG'): array
     {
-        $country = $country ?: config('flutterwave.default_country_to_get_banks');
-        $response = Http::withToken($this->secretFlutterwaveKey)
-            ->get($this->baseUrl."/banks/{$country}");
+        $country = $country ?: 'NG';
+        $response = Http::withToken($this->secretFlutterwaveKey)->get($this->baseUrl."/banks/{$country}?include_provider_type=1");
         Log::info('bankList '.$response);
 
         return $response->json();

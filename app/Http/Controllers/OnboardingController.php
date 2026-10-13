@@ -195,7 +195,7 @@ class OnboardingController extends Controller
     public function complete(Request $request)
     {
         $request->validate([
-            'fullName' => 'sometimes|string',
+            'fullName' => 'string',
         ]);
 
         if ($request->post('fullName')) {
