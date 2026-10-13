@@ -67,43 +67,40 @@ class OnboardingController extends Controller
         $user = Auth::user();
 
         if (config('demo')) {
-                    $user->phone()->updateOrCreate([
+            $user->phone()->updateOrCreate([
                 'user_id' => $user->id
             ], [
                 'phone_number' =>  $validated['phone_number']
             ]);
 
-                 $CreateOtpRecord = new CreateOtpRecord;
-                $result =  $CreateOtpRecord->execute(user: $user , demo: true);
-                if ($result) {
-                    return redirect()->route('confirm.phone.otp')->with('success', 'Verification code sent successfully');
-                }
-        }
-        else {
-          $verificationStatus = $phoneNumberVerification->execute(phone_number: $request->phone_number, user: $request->user(), registerPhoneNumber: true);
-
-        if (app(PhoneNumberVerificationContract::class) instanceof FlutterWavePhoneVerification) {
-            if ($verificationStatus['status']) {
-                // $request->user()->account()->otps()->create([
-                //     'otp' => $otpData['otp'],
-                //     'medium' => $otpData['medium'],
-                //     'reference' => $otpData['reference'],
-                //     'expiration' => $otpData['expiration'],
-                // ]);
-
+            $CreateOtpRecord = new CreateOtpRecord;
+            $result =  $CreateOtpRecord->execute(user: $user, demo: true);
+            if ($result) {
                 return redirect()->route('confirm.phone.otp')->with('success', 'Verification code sent successfully');
-            } else {
-                Log::error('Failed to create OTP record for user', [
-                    'user_id' => $user->id,
-                    'phone_number' => $request->phone_number,
-                ]);
+            }
+        } else {
+            $verificationStatus = $phoneNumberVerification->execute(phone_number: $request->phone_number, user: $request->user(), registerPhoneNumber: true);
 
-                return back()->with('error', 'Failed to send verification code. Please try again.');
+            if (app(PhoneNumberVerificationContract::class) instanceof FlutterWavePhoneVerification) {
+                if ($verificationStatus['status']) {
+                    // $request->user()->account()->otps()->create([
+                    //     'otp' => $otpData['otp'],
+                    //     'medium' => $otpData['medium'],
+                    //     'reference' => $otpData['reference'],
+                    //     'expiration' => $otpData['expiration'],
+                    // ]);
+
+                    return redirect()->route('confirm.phone.otp')->with('success', 'Verification code sent successfully');
+                } else {
+                    Log::error('Failed to create OTP record for user', [
+                        'user_id' => $user->id,
+                        'phone_number' => $request->phone_number,
+                    ]);
+
+                    return back()->with('error', 'Failed to send verification code. Please try again.');
+                }
             }
         }
-        }
-
-     
     }
 
 
@@ -116,36 +113,37 @@ class OnboardingController extends Controller
     public function verifyPhoneNumberOtp(Request $request, verifyPhoneNumberVerificationOtp $verifyPhoneVerificationOtp)
     {
 
-      $validated =  $request->validate([
+        $validated =  $request->validate([
             'verification_code' => 'required|string|size:6',
         ]);
 
         if (config('demo')) {
             if ($validated['verification_code'] = $request->user()->otps()->latest()->first()) {
                 return redirect()->route('bvn.consent');
+            } else {
+                return back()->with('error',  'Failed to verify phone number. Please try again.');
             }
-            else{
-              return back()->with('error',  'Failed to verify phone number. Please try again.');
-            }
-        }else{
-                $user = $request->user();
-
-        $verificationResult = $verifyPhoneVerificationOtp->execute(verification_code: $request->verification_code, user: $user);
-
-        if ($verificationResult['status']) {
-            return redirect()->route('bvn.consent')->with('success', 'Phone number verified successfully');
         } else {
-            return back()->with('error', $verificationResult['message'] ?? 'Failed to verify phone number. Please try again.');
+            $user = $request->user();
+
+            $verificationResult = $verifyPhoneVerificationOtp->execute(verification_code: $request->verification_code, user: $user);
+
+            if ($verificationResult['status']) {
+                return redirect()->route('bvn.consent')->with('success', 'Phone number verified successfully');
+            } else {
+                return back()->with('error', $verificationResult['message'] ?? 'Failed to verify phone number. Please try again.');
+            }
         }
     }
-        }
-
-   
 
 
     public function resendPhoneVerificationOtp(Request $request, sendPhoneNumberVerificationOtp $phoneNumberVerification)
     {
-        $phoneNumberVerification->execute(user: $request->user(), registerPhoneNumber: false, phone_number: '');
+        if (config('demo')) {
+            return back()->with('success', 'Otp resent');
+        } else {
+            $phoneNumberVerification->execute(user: $request->user(), registerPhoneNumber: false, phone_number: '');
+        }
     }
 
 
@@ -226,8 +224,8 @@ class OnboardingController extends Controller
         $completeOnboardingService = app(CompleteOnboarding::class);
         $result = $completeOnboardingService->execute($dataToCreateVirtualAccount);
         if ($result) {
-           return redirect()->route('pin.set');
+            return redirect()->route('pin.set');
         }
-       return redirect()->back()->with('onboarding_completion_error' , 'something went wrong try again later');
+        return redirect()->back()->with('onboarding_completion_error', 'something went wrong try again later');
     }
 }

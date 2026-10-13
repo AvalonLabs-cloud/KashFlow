@@ -25,6 +25,7 @@ declare module '@inertiajs/core' {
                 message: any;
                 error: any;
                 transaction_data: any;
+                success:any;
             };
             [key: string]: unknown;
         };

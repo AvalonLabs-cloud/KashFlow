@@ -47,6 +47,7 @@ public function share(Request $request): array
 
         'flash' => [
             'error' => $request->session()->get('error'),
+            'success' => $request->session()->get('success'),
             'message' => $request->session()->get('message'),
             'profile_updated' => $request->session()->get('profile_updated'),
             'successfull_account_creation' => $request->session()->get('successfull_account_creation'),

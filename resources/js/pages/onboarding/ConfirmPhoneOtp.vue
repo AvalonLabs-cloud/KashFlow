@@ -1,4 +1,5 @@
 <template>
+    <SuccessNotification ref="notification"/>
     <DemoInfo/>
     <div
         class="identity-verification-container min-h-screen flex items-center justify-center p-md overflow-hidden relative bg-surface">
@@ -29,7 +30,7 @@
                         class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center text-on-primary shadow-sm">
                         <span class="material-symbols-outlined text-[28px] fill-icon">account_balance_wallet</span>
                     </div>
-                    <span class="font-headline-md text-[28px] text-primary tracking-tight font-bold">FintechPay</span>
+                    <span class="font-headline-md text-[28px] text-primary tracking-tight font-bold">KashFlow</span>
                 </div>
 
                 <h1 class="font-headline-lg text-display-lg text-on-background text-center mb-md font-bold">Verify Your
@@ -84,14 +85,17 @@
 
 <script lang="ts" setup>
 import { useForm } from '@inertiajs/vue3'
+import { usePage } from '@inertiajs/vue3'
 import axios from 'axios';
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import DemoInfo from '@/components/DemoInfo.vue';
 import DemoInstructions from '@/components/DemoInstructions.vue';
+import SuccessNotification from '@/components/SuccessNotification.vue';
+const notification = ref<InstanceType<typeof SuccessNotification> | null>(null)
 
-
-
+const page = usePage()
 // UI Loading & Transition Flags
+
 const isLoading = ref(true)
 const isMounted = ref(false)
 const instruction = ref('enter 777777')
@@ -111,6 +115,10 @@ let timerInterval = null
 
 // Computed properties
 const isOtpComplete = computed(() => otp.value.every(char => char.length === 1))
+
+const displayForSuccess = () => {
+    notification.value.showSuccess(page.props.flash.success)
+}
 
 const buttonText = computed(() => {
     if (isVerifying.value) {
@@ -298,6 +306,8 @@ const resendCode = async () => {
         isResending.value = false
     }
 }
+
+displayForSuccess()
 
 
 </script>
