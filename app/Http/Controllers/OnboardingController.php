@@ -18,7 +18,7 @@ use App\BvnConsentStatus;
 use Illuminate\Support\Str;
 use App\Domains\Onboarding\Services\CompleteOnboarding;
 use App\Transactions\CreateOtpRecord;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use PSpell\Config;
 
 class OnboardingController extends Controller
@@ -195,7 +195,7 @@ class OnboardingController extends Controller
     public function complete(Request $request)
     {
         $request->validate([
-            'fullName' => 'sometimes|required|string',
+            'fullName' => 'sometimes|string',
         ]);
 
         if ($request->post('fullName')) {
