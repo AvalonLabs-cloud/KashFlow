@@ -1,4 +1,5 @@
 <template>
+    <DemoInfo/>
     <div
         class="identity-verification-container min-h-screen flex items-center justify-center p-md overflow-hidden relative bg-surface">
         <div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary-container-20 floating-glow">
@@ -44,7 +45,7 @@
                         @input="handleInput($event, index)" @keydown="handleKeyDown($event, index)"
                         @paste="handlePaste" />
                 </div>
-
+  <DemoInstructions :instructions="instruction"/>
                 <div
                     class="w-full h-8 flex items-center justify-center mb-md overflow-hidden transition-all duration-300">
                     <div v-if="hasError" class="flex items-center gap-xs text-error font-label-md text-label-md">
@@ -82,17 +83,18 @@
 </template>
 
 <script lang="ts" setup>
-import { router } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
 import axios from 'axios';
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
+import DemoInfo from '@/components/DemoInfo.vue';
+import DemoInstructions from '@/components/DemoInstructions.vue';
 
 
 
 // UI Loading & Transition Flags
 const isLoading = ref(true)
 const isMounted = ref(false)
-
+const instruction = ref('enter 777777')
 // OTP State
 const otp = ref(['', '', '', '', '', ''])
 const otpInputs = ref([])

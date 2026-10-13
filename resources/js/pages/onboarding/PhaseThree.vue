@@ -2,8 +2,9 @@
     <div class="email-verification-page">
         <main class="ev-main">
             <div class="ev-container">
+                    <DemoInfo/>
                 <div class="ev-header">
-    <DemoInfo/>
+
                     <div class="ev-icon-container">
                         <span class="material-symbols-outlined ev-icon-security"><svg xmlns="http://www.w3.org/2000/svg"
                                 width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#00ffb3" stroke-width="2"
