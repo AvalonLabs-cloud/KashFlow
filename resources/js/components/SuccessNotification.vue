@@ -6,7 +6,7 @@ const isVisible = ref(false)
 
 let timeout: ReturnType<typeof setTimeout> | undefined
 
-function showSuccess(text: string = 'Action completed successfully!') {
+function showSuccess(text: string = '') {
     message.value = text
     isVisible.value = true
 
