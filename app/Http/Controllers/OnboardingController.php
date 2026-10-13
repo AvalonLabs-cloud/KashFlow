@@ -9,7 +9,6 @@ use App\Integrations\PhoneVerification\Flutterwave\FlutterWavePhoneVerification;
 use App\Models\User;
 use App\OnboardingPhase;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -19,6 +18,7 @@ use App\BvnConsentStatus;
 use Illuminate\Support\Str;
 use App\Domains\Onboarding\Services\CompleteOnboarding;
 use App\Transactions\CreateOtpRecord;
+use Illuminate\Http\Client\Request;
 use PSpell\Config;
 
 class OnboardingController extends Controller
