@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Domains\Transactions\Services;
+namespace App\Domains\Transactions\Services;
 
 use App\AdminTransactionStatus;
 use App\Models\Account;
