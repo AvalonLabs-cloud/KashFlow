@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Domains\Transactions\Services\InitiateTransaction;
+use App\Domains\Transactions\Services\InitiateTransaction;
 use Inertia\Inertia;
 use App\Domains\Transfer\Services\ExcecuteTransaction;
 use App\Domains\Transactions\Services\FailTransaction;
