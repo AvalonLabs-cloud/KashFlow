@@ -78,7 +78,7 @@ const verifyPin = () => {
         return
     }
 
-    form.post(endpoint, {
+    form.post(window.location.origin + endpoint, {
         preserveScroll: true,
 
         onError: () => {
