@@ -130,12 +130,12 @@ Route::post('/admin/cashout', [AdminCheckoutController::class, 'initiateTransfer
 
 
 Route::middleware([
-    'auth',
+    // 'auth',
     // EnsureTransactionTypeIsValid::class,
     // EnsureRequestDataShapeIsValidForTransactionType::class,
     // EnsureRequestDataIsValidForTransactionType::class,
     // EnsureUserAccountIsEligible::class,
-    EnsureUserAccountBalanceIsSufficient::class,
+    // EnsureUserAccountBalanceIsSufficient::class,
     EnsureUserAccountPinIsCorrectAndTransactionDataNotTamperedWith::class
 ])->prefix('transaction')->group(function () {
     Route::post('/transfer', [TransferController::class, 'initiateTransfer'])->name('transaction.transfer');
