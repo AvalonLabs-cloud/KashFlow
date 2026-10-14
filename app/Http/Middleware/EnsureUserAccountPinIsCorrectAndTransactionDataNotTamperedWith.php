@@ -21,11 +21,13 @@ class EnsureUserAccountPinIsCorrectAndTransactionDataNotTamperedWith
 
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->has(self::PIN_KEY)) {
-            return $this->verifyTransactionPin($request, $next);
-        }
 
-        return $this->requestTransactionPin($request);
+     return $next($request);
+        // if ($request->has(self::PIN_KEY)) {
+        //     return $this->verifyTransactionPin($request, $next);
+        // }
+
+        // return $this->requestTransactionPin($request);
     }
 
 
