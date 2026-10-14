@@ -19,7 +19,8 @@ use Illuminate\Support\Str;
 use App\Domains\Onboarding\Services\CompleteOnboarding;
 use App\Transactions\CreateOtpRecord;
 use Illuminate\Http\Request;
-use PSpell\Config;
+use App\Services\GenerateBeneficiariesForDemo;
+use App\Services\GenerateTransactionForDemo;
 
 class OnboardingController extends Controller
 {
@@ -224,9 +225,24 @@ class OnboardingController extends Controller
 
         $completeOnboardingService = app(CompleteOnboarding::class);
         $result = $completeOnboardingService->execute($dataToCreateVirtualAccount);
-       if (config('demo')) {
-        // create credit records and benficiaries
-       }
+        if (config('demo')) {
+            $generateTransactionForDemoObject = app(GenerateTransactionForDemo::class);
+            $arrayResolvedFromGenerateTransactionForDemoObject = $generateTransactionForDemoObject->generateTransactions(count: 40, userId: auth('web')->user()->id, accountId: auth('web')->user()->account->id);
+            auth('web')->user()->transactions()->insert(
+                $arrayResolvedFromGenerateTransactionForDemoObject
+            );
+            $generateBeneficiariesForDemoObject = app(GenerateBeneficiariesForDemo::class);
+
+            $arrayResolvedFromGenerateBeneficiariesForDemoObject =
+                $generateBeneficiariesForDemoObject->generateBeneficiaries(
+                    count: 20,
+                    userId: auth('web')->user()->id,
+                );
+
+            auth('web')->user()->beneficiaries()->insert(
+                $arrayResolvedFromGenerateBeneficiariesForDemoObject
+            );
+        }
         if ($result) {
             return redirect()->route('pin.set');
         }
