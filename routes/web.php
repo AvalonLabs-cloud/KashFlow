@@ -71,7 +71,7 @@ Route::prefix('onboarding')->group(function () {
     //     })->middleware(['throttle:10,1']);
     // });
 
-    Route::middleware(['auth' , EnsurePhaseThreeOnboarding::class])->group(function () {
+    Route::middleware(['auth', EnsurePhaseThreeOnboarding::class])->group(function () {
         Route::get('/phase_three', [OnboardingController::class, 'showPhaseThree'])->name('phone.verification.ui');
         Route::post('/resend_phone_verification_sms', [OnboardingController::class, 'resendPhoneVerificationOtp']);
         Route::post('/send_phone_verification_sms', [OnboardingController::class, 'sendPhoneNumberOtp']);
@@ -85,15 +85,19 @@ Route::prefix('onboarding')->group(function () {
         Route::post('/bvn/acquisition', [OnboardingController::class, 'storeBvn'])->name('bvn.consent.initiate');
     });
 
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/phase_five', function () {
+            return Inertia::render('onboarding/PhaseFive');
+        })->name('full.name');
+    });
 
-    Route::get('/phase_five', function () {
-        return Inertia::render('onboarding/PhaseFive');
-    })->name('full.name');
+
+
 
     Route::post('/complete', [OnboardingController::class, 'complete'])->name('complete');
 });
 
-Route::middleware(['auth' , EnsureUserHasCompletedOnboarding::class])->group(function () {
+Route::middleware(['auth', EnsureUserHasCompletedOnboarding::class])->group(function () {
     Route::get('/transaction_status', [UserController::class, 'transactionStatus'])->name('complete_transfer_status');
     Route::get('/main-index', [UserController::class, 'indexPage'])->name('index-page');
     Route::get('/airtime', [UserController::class, 'airtimePage']);
@@ -118,11 +122,11 @@ Route::middleware(['auth' , EnsureUserHasCompletedOnboarding::class])->group(fun
     Route::get('/history', [UserController::class, 'history']);
     Route::get('/transactions/{transactionReference}/status', [TransactionStatus::class, 'checkTransactionStatus']);
     Route::get('/cardInfo', [UserController::class, 'cardInfo']);
-    Route::get('/transaction-fee' , [UserController::class , 'transactionFee']);
+    Route::get('/transaction-fee', [UserController::class, 'transactionFee']);
 });
 
 
-Route::post('/admin/cashout',[AdminCheckoutController::class , 'initiateTransfer'])->middleware(['auth' , EnsureIsAdmin::class]);
+Route::post('/admin/cashout', [AdminCheckoutController::class, 'initiateTransfer'])->middleware(['auth', EnsureIsAdmin::class]);
 
 
 Route::middleware([
