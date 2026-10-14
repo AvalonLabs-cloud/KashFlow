@@ -19,8 +19,8 @@ use Illuminate\Support\Str;
 use App\Domains\Onboarding\Services\CompleteOnboarding;
 use App\Transactions\CreateOtpRecord;
 use Illuminate\Http\Request;
-use App\Services\GenerateBeneficiariesForDemo;
-use App\Services\GenerateTransactionForDemo;
+use App\Service\GenerateBeneficiariesForDemo;
+use App\Service\GenerateTransactionForDemo;
 
 class OnboardingController extends Controller
 {
