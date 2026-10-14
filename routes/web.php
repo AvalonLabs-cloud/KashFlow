@@ -134,7 +134,7 @@ Route::middleware([
     // EnsureTransactionTypeIsValid::class,
     // EnsureRequestDataShapeIsValidForTransactionType::class,
     // EnsureRequestDataIsValidForTransactionType::class,
-    EnsureUserAccountIsEligible::class,
+    // EnsureUserAccountIsEligible::class,
     EnsureUserAccountBalanceIsSufficient::class,
     EnsureUserAccountPinIsCorrectAndTransactionDataNotTamperedWith::class
 ])->prefix('transaction')->group(function () {
