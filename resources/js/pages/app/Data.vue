@@ -322,14 +322,14 @@ const completePurchase = () => {
 }
 
 .phone-input {
-    background: transparent;
+    background:#E5E7EB;
     border: none;
     width: 100%;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 400;
     color: var(--text-main);
     outline: none;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.2px;
 }
 
 .phone-input::placeholder {
