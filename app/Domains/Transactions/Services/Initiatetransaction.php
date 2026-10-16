@@ -25,8 +25,8 @@ class InitiateTransaction
 
         string $type,
         int $amount,
-        // array $metadata = [],
              Account $account,
+                  array $metadata = [],
     ): array {
         $this->validateTransactionType($type);
 
