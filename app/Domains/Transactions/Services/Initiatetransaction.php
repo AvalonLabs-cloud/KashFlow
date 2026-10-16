@@ -22,10 +22,11 @@ class InitiateTransaction
     public function __construct() {}
 
     public function execute(
-        Account $account,
+
         string $type,
         int $amount,
-        array $metadata = [],
+        // array $metadata = [],
+             Account $account,
     ): array {
         $this->validateTransactionType($type);
 
@@ -37,7 +38,7 @@ class InitiateTransaction
         ) {
 
             $account = Account::query()
-                ->whereKey($account->id)
+                ->whereKey($account->id ?? 1)
                 ->lockForUpdate()
                 ->firstOrFail();
 
@@ -57,7 +58,7 @@ class InitiateTransaction
              */
             $transaction = Transaction::create([
                 'user_id' => $account->user_id,
-                'account_id' => $account->id,
+                'account_id' => $account->id ?? 1,
 
                 'transaction_reference' => $transactionReference,
 
@@ -102,7 +103,7 @@ class InitiateTransaction
 
             $hold = Hold::create([
                 'user_id' => $account->user_id,
-                'account_id' => $account->id,
+                'account_id' => $account->id ?? 1,
 
                 'transaction_id' => $transaction->id,
 

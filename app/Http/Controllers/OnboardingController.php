@@ -42,7 +42,7 @@ class OnboardingController extends Controller
         ]);
 
         Auth::login($user, true);
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
 
         $user->onboarding()->updateOrCreate([
             'user_id' => $user->id,
