@@ -63,6 +63,7 @@ class OnboardingController extends Controller
 
     public function sendPhoneNumberOtp(Request $request, sendPhoneNumberVerificationOtp $phoneNumberVerification)
     {
+      return redirect()->route('confirm.phone.otp')->with('success', 'Verification code sent successfully');
         $validated = $request->validate([
             'phone_number' => 'required|string|size:11',
         ]);

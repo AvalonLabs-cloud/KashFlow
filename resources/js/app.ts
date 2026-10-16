@@ -39,15 +39,18 @@ import "vue3-snackbar/styles";
 // import { initializeTheme } from '@/composables/useAppearance';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+// const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-if (token) {
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
-}
+// if (token) {
+//     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+// }
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
+axios.defaults.xsrfCookieName = 'XSRF-TOKEN';
+axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
 
 createInertiaApp({
     defaults:{
@@ -61,7 +64,7 @@ createInertiaApp({
             `./pages/${name}.vue`,
             import.meta.glob<DefineComponent>('./pages/**/*.vue'),
         ),
-        
+
     setup({ el, App, props, plugin }) {
         const pinia = createPinia()
         pinia.use(piniaPluginPersistedstate)
