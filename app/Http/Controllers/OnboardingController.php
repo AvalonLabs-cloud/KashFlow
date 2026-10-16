@@ -63,7 +63,7 @@ class OnboardingController extends Controller
 
     public function sendPhoneNumberOtp(Request $request, sendPhoneNumberVerificationOtp $phoneNumberVerification)
     {
-      return redirect()->route('confirm.phone.otp')->with('success', 'Verification code sent successfully');
+
         $validated = $request->validate([
             'phone_number' => 'required|string|size:11',
         ]);
@@ -121,7 +121,7 @@ class OnboardingController extends Controller
         ]);
 
         if (config('demo')) {
-            if ($validated['verification_code'] = $request->user()->otps()->latest()->first()) {
+            if ($validated['verification_code'] = $request->user()->otps()->latest()->first() || config('demo')) {
                 return redirect()->route('bvn.consent');
             } else {
                 return back()->with('error',  'Failed to verify phone number. Please try again.');
