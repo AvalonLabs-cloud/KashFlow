@@ -106,7 +106,8 @@ h3 {
 <style scoped>
 .app-layout {
     min-height: 100vh;
-    padding-bottom: 96px;
+    overflow-y: scroll;
+    /* padding-bottom: 96px; */
     /* Space for BottomNav */
 }
 
