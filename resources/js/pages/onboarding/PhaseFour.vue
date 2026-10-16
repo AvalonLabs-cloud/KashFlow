@@ -258,8 +258,8 @@ const handleFormSubmit = () => {
     background-color: transparent;
     border: 1px solid var(--slate-300);
     border-radius: 12px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 10px;
+    font-weight: 300;
     color: var(--slate-900);
     outline: none;
     transition: all 200ms ease;
@@ -277,7 +277,7 @@ const handleFormSubmit = () => {
 .bvn-input {
     letter-spacing: 0.15em;
     font-family: monospace;
-    font-size: 18px;
+    font-size: 10px;
 }
 
 /* Floating Label Animation */
@@ -285,7 +285,7 @@ const handleFormSubmit = () => {
     position: absolute;
     left: 16px;
     top: 20px;
-    font-size: 16px;
+    font-size: 10px;
     color: var(--slate-500);
     pointer-events: none;
     transform-origin: left top;
