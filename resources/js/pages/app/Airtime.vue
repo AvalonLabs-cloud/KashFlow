@@ -61,8 +61,9 @@
                         <span v-if="confirm" class="spinner"></span>
                     </button>
                 </section>
-                <BottomNav />
+
             </main>
+                    <BottomNav />
             <Teleport to="body">
                         <ConfirmTransaction :transactionFeesLoading="feeIsLoading" :transactionType="transactionType" :show="confirm" :amount="selectedAmount" @close="toggleConfirm"
                  @completeProcess="handleCompleteProcess" :availableBalance="$page.props.availableBalance" :transactionFees="fee" @confirm="handleContinue" :recipient="phoneNumber"  />
@@ -214,7 +215,7 @@ const selectedProviderName = computed(() => {
 /* Scrollable Content */
 .content-area {
     flex: 1;
-    padding: 24px 20px 140px 20px;
+    padding: 24px 20px 10px 20px;
     /* Bottom padding for fixed footer */
     overflow-y: auto;
     /* scrollbar-width: none; */
@@ -416,7 +417,7 @@ const selectedProviderName = computed(() => {
 /* Footer Section */
 .payment-footer {
     position: relative;
-    bottom: 0;
+    bottom: 15;
     left: 0;
     width: 100%;
     background-color: #ffffff;
