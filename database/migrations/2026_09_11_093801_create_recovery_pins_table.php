@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('recovery_pins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('account_id')->constrained('account')
-                ->constrained()
+            $table->foreignId('account_id')->constrained('accounts')
                 ->cascadeOnDelete();
             $table->string('token_hash')->unique();
             $table->timestamp('expires_at');
