@@ -12,14 +12,6 @@
         </button>
         <h2 class="header-title">Transfer Status</h2>
       </div>
-      <div class="header-right">
-        <button class="icon-button" aria-label="Help">
-          <span class="material-symbols-outlined">help</span>
-        </button>
-        <button class="icon-button" aria-label="Share">
-          <span class="material-symbols-outlined">share</span>
-        </button>
-      </div>
     </header>
 
     <main class="content">
@@ -100,7 +92,7 @@ import { ref} from 'vue';
 
 const emit = defineEmits(['back', 'done', 'share']);
 
-const props = defineProps([
+defineProps([
     'data',
     'clients_name'
 ])
