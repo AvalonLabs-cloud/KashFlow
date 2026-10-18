@@ -26,7 +26,7 @@ class DemoCompletionListener implements ShouldQueue
     public function handle(DemoCompletion $event): void
     {
         sleep(3);
-        $transaction = Transaction::where($event->tx_ref)->first();
+        $transaction = Transaction::where('transaction_reference', $event->tx_ref)->first();
         $transaction->update([
             'status' => TransactionStatus::SUCCESSFUL,
             'completed_at' => now(),
