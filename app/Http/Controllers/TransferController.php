@@ -9,6 +9,7 @@ use App\Domains\Transfer\Services\ExcecuteTransaction;
 use App\Domains\Transactions\Services\FailTransaction;
 use App\Domains\Transfer\Exceptions\TransferFailedException;
 use Illuminate\Support\Facades\Log;
+use App\Events\DemoCompletion;
 
 class TransferController extends Controller
 {
@@ -38,6 +39,13 @@ class TransferController extends Controller
             ];
 
             try {
+                if (config('demo')) {
+                    DemoCompletion::dispatch($transaction['transaction']->transaction_reference);
+                    return redirect()->route('complete_transfer_status', [
+                        'transactionReference' => $payloadForPaymentServiceProvider['reference'],
+                        'clients_name' => auth('web')->user()->first_name,
+                    ]);
+                }
                 $excecuteTransaction->excecute(data: $payloadForPaymentServiceProvider);
                 return redirect()->route('complete_transfer_status', [
                     'transactionReference' => $payloadForPaymentServiceProvider['reference'],

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Domains\Bills\Airtime\Exceptions\AirtimePurchaseFailedException;
 use Inertia\Inertia;
 use App\Domains\Bills\Airtime\Services\ExcecuteTransaction;
+use App\Events\DemoCompletion;
 
 class AirtimeController extends Controller
 {
@@ -43,6 +44,13 @@ class AirtimeController extends Controller
             ];
 
             try {
+                if (config('demo')) {
+                    DemoCompletion::dispatch($transaction['transaction']->transaction_reference);
+                    return redirect()->route('complete_transfer_status', [
+                        'transactionReference' => $payloadForPaymentServiceProvider['reference'],
+                        'clients_name' => auth('web')->user()->first_name,
+                    ]);
+                }
                 Log::info('airtime controller hit 4');
                 $excecuteTransaction->excecute(data: $payloadForPaymentServiceProvider);
                 Log::info('airtime controller hit 5');
@@ -67,7 +75,7 @@ class AirtimeController extends Controller
                 ], 400);
             }
         } catch (\Exception $e) {
-            Log::info('airtime error '.$e->getMessage());
+            Log::info('airtime error ' . $e->getMessage());
             return back()->with([
                 'message' => 'Failed to initiate transaction.',
                 'error' => $e->getMessage(),

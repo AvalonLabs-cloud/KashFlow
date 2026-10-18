@@ -9,6 +9,7 @@ use App\Domains\Bills\Data\Services\ExcecuteTransaction;
 use App\Domains\Bills\Data\Exceptions\DataPurchaseFailedException;
 use Illuminate\Support\Facades\Log;
 use App\Domains\Transactions\Services\FailTransaction;
+use App\Events\DemoCompletion;
 use Inertia\Inertia;
 
 class DataBillController extends Controller
@@ -42,6 +43,13 @@ class DataBillController extends Controller
             ];
 
             try {
+                                if (config('demo')) {
+                    DemoCompletion::dispatch($transaction['transaction']->transaction_reference);
+                    return redirect()->route('complete_transfer_status', [
+                        'transactionReference' => $payloadForPaymentServiceProvider['reference'],
+                        'clients_name' => auth('web')->user()->first_name,
+                    ]);
+                }
                 $excecuteTransaction->excecute(data: $payloadForPaymentServiceProvider);
                 return redirect()->route('complete_transfer_status', [
                     'transactionReference' => $payloadForPaymentServiceProvider['reference'],
