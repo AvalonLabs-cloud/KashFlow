@@ -8,7 +8,7 @@
           aria-label="Go back"
           @click="$emit('back')"
         >
-          <span class="material-symbols-outlined">arrow_back</span>
+          <span class="material-symbols-outlined" v-html="arrowbackSvg"></span>
         </button>
         <h2 class="header-title">Transfer Status</h2>
       </div>
@@ -18,9 +18,7 @@
       <section class="status-summary">
         <div class="status-icon-wrapper">
           <div :class="['status-icon', status]">
-            <span class="material-symbols-outlined">
-              {{ status === 'success' ? 'check_circle' : 'error' }}
-            </span>
+             <span class="material-symbols-outlined" v-html="checkSvg"></span>
           </div>
           <div class="status-glow"></div>
         </div>
@@ -85,6 +83,8 @@
 
 <script lang="ts"  setup>
 import { ref} from 'vue';
+import { checkSvg } from '@/svgs/svg';
+import { arrowbackSvg } from '@/svgs/svg';
 // import BottomNav from '../BottomNav.vue';
 // import Header from '../Header.vue';
 

@@ -26,16 +26,12 @@ const transactionReference = computed(() => {
     return props.transactionReference
 })
 
-console.log('props for transfer status page ', props)
-console.log('status for transfer status page ', status.value)
-
-
 onMounted(() => {
     startPolling(transactionReference.value)
 });
 
 
-const goHome = () => router.visit('/dashboard');
+const goHome = () => router.visit('/main-index');
 </script>
 
 <template>
