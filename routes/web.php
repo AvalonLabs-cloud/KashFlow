@@ -136,7 +136,7 @@ Route::middleware([
     // EnsureRequestDataIsValidForTransactionType::class,
     // EnsureUserAccountIsEligible::class,
     // EnsureUserAccountBalanceIsSufficient::class,
-    // EnsureUserAccountPinIsCorrectAndTransactionDataNotTamperedWith::class
+    EnsureUserAccountPinIsCorrectAndTransactionDataNotTamperedWith::class
 ])->prefix('transaction')->group(function () {
     Route::post('/transfer', [TransferController::class, 'initiateTransfer'])->name('transaction.transfer');
     Route::post('/airtime ', [AirtimeController::class, 'processAirtime'])->name('transaction.airtime');

@@ -37,9 +37,6 @@
                   <label class="font-label-md text-label-md font-medium text-on-surface" for="full-name-input">
                     Full name
                   </label>
-                  <span class="font-label-sm text-label-sm text-secondary tracking-normal font-normal">
-                    (Optional)
-                  </span>
                 </div>
 
                 <div class="relative group">
@@ -82,7 +79,7 @@
 import { router } from "@inertiajs/vue3";
 import { ref } from 'vue'
 
-const fullName = ref('')
+const fullName = ref('Emmanuel Tochukwu')
 const isFocused = ref(false)
 const isSubmitting = ref(false)
 
@@ -108,7 +105,7 @@ const handleSubmit = () => {
   --color-surface-container: #e5eeff;
   --color-surface-container-low: #eff4ff;
   --color-surface-container-lowest: #ffffff;
-  
+
   font-family: 'Inter', sans-serif;
   color: var(--color-on-surface);
   background-color: var(--color-surface-container-lowest);

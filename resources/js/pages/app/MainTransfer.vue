@@ -11,12 +11,12 @@ import TransferTransactionItem from '../../components/TransferTransactionItem.vu
 const transferStore = useTransferStore()
 
 const formData = reactive({
-    accountNumber: '',
+    accountNumber: '9132026039',
     banks: {} as any,
-    accountName: '',
+    accountName: 'Forest green',
 });
 
-const selectedBank = ref('');
+const selectedBank = ref('031');
 const isValidating = ref(false);
 const props = defineProps([
     'beneficiaries'
@@ -26,6 +26,10 @@ const beneficiaryData = computed(() => props.beneficiaries)
 
 const { accountNumber, banks, accountName } = toRefs(formData);
 const search = ref('')
+
+watch([], () => {
+    fetchAccountName()
+})
 
 watch([accountNumber, selectedBank], ([currentValueAccountNumber, currentValueBankName]) => {
     if (currentValueAccountNumber.length === 10 && currentValueBankName) {
@@ -64,7 +68,7 @@ const initiateTransfer = () => {
         bankCode: selectedBank.value,
         accountName: accountName.value,
     });
-     router.get(`/complete_transfer?transferId=${transferId}`);
+    router.get(`/complete_transfer?transferId=${transferId}`);
 };
 
 async function getBanks() {
@@ -112,7 +116,7 @@ onMounted(() => {
 <template>
 
     <div class="app-viewport">
-        <BackAndHistoryHeader :page-name="pageName"/>
+        <BackAndHistoryHeader :page-name="pageName" />
         <main class="main-content">
             <section class="form-card">
                 <div class="input-group">

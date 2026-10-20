@@ -97,7 +97,7 @@ defineProps([
     'clients_name'
 ])
 
-const statusTitle = ref('Processing Transactions')
+const statusTitle = ref('Success')
 
 const copyToClipboard = (text) => {
   navigator.clipboard.writeText(text);

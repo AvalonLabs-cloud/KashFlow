@@ -133,7 +133,7 @@ class UserController extends Controller
         return Inertia::render('app/TransferStatus', [
             'transactionReference' => $request->input('transactionReference'),
             'transaction' => Transaction::where('transaction_reference', $request->input('transactionReference'))->first(),
-            'clients_name' => $request->input('clients_name'),
+            'clients_name' => $request->input('clients_name') ?? '',
         ]);
     }
 
