@@ -125,6 +125,9 @@ Route::middleware(['auth', EnsureUserHasCompletedOnboarding::class])->group(func
     Route::get('/transaction-fee', [UserController::class, 'transactionFee']);
 });
 
+Route::fallback(function (){
+    return redirect()->route('index-page');
+});
 
 Route::post('/admin/cashout', [AdminCheckoutController::class, 'initiateTransfer'])->middleware(['auth', EnsureIsAdmin::class]);
 

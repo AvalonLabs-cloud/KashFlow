@@ -11,12 +11,12 @@ import TransferTransactionItem from '../../components/TransferTransactionItem.vu
 const transferStore = useTransferStore()
 
 const formData = reactive({
-    accountNumber: '9132026039',
+    accountNumber: '0690000031',
     banks: {} as any,
     accountName: 'Forest green',
 });
 
-const selectedBank = ref('031');
+const selectedBank = ref('044');
 const isValidating = ref(false);
 const props = defineProps([
     'beneficiaries'
@@ -133,7 +133,7 @@ onMounted(() => {
                     <button class="select-btn">
                         <select class="base-input" v-model="selectedBank">
                             <option disabled value="">Select Bank</option>
-                            <option v-for="bank in banks" :key="bank.code" :value="bank.code">
+                            <option v-for="bank in banks" :key="bank.code" :value="bank.code" :selected="bank.code === '044'">
                                 {{ bank.name }}
                             </option>
                         </select>
